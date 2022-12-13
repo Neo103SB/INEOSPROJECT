@@ -11,7 +11,7 @@ import plotly.figure_factory as ff
 
 import sys
 
-df = pd.read_csv(r"C:\Users\HP\Downloads\Opportunities (2).csv")
+df = pd.read_csv(r"Opportunities (2).csv")
 df[' "Solution"'] = df[' "Solution"'].str.replace("Services::::", "")
 df[' "Partenaire"'] = df[' "Partenaire"'].str.replace("Vendors::::", "")
 df[' "Assigned To"'] = df[' "Assigned To"'].str.replace("@ineos.ma", "")
