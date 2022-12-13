@@ -220,7 +220,7 @@ st.bar_chart(t1, 'Rappel du partenaire technologique', 'Amount')
 st.bar_chart(t2, 'Solution', 'Amount')
 st.bar_chart(t3, 'Assigned To', 'Amount')
 
-"""
+
 if __name__ == '__main__':
     sys.argv = ["streamlit", "run", "Streamlit.py"]
-    sys.exit(stcli.main())"""
+    sys.exit(stcli.main())
