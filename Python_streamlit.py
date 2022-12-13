@@ -7,7 +7,7 @@ import io
 import streamlit as st
 import plotly.figure_factory as ff
 
-from streamlit.web import cli as stcli
+#from streamlit.web import cli as stcli
 
 import sys
 
