@@ -221,6 +221,4 @@ st.bar_chart(t2, x='Solution', y='Amount')
 st.bar_chart(t3, x='Assigned To', y='Amount')
 
 
-if __name__ == '__main__':
-    sys.argv = ["streamlit", "run", "Python_streamlit.py"]
-    sys.exit(stcli.main())
+
