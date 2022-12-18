@@ -32,7 +32,7 @@ import time
 import glob
 import os
 
-browser = webdriver.Chrome(executable_path='../drivers/chromedriver.exe')
+browser = webdriver.Chrome(executable_path='chromedriver/chromedriver.exe')
 browser.get("https://tmp.ineos-crm.ma/")
 file = open(r"config.txt")
 line = file.readlines()
