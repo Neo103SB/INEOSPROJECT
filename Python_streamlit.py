@@ -451,13 +451,4 @@ df6 = pd.DataFrame([['Cloud', s1], ['Postes de travail', s2], ['Réseau', s3], [
 fig5 = px.bar(df6, x="Solution", y="Sales")
 st.plotly_chart(fig5)
 
-####################################GRAPHES_PLOTTING############################
-
-t1 = pd.DataFrame(d, columns=['Rappel du partenaire technologique', 'Amount'])
-t2 = pd.DataFrame(z, columns=['Solution', 'Amount'])
-t3 = pd.DataFrame(c, columns=['Assigned To', 'Amount'])
-
-st.bar_chart(t1, x='Rappel du partenaire technologique', y='Amount')
-st.bar_chart(t2, x='Solution', y='Amount')
-st.bar_chart(t3, x='Assigned To', y='Amount')
 
