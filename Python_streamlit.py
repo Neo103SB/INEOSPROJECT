@@ -33,7 +33,7 @@ from selenium.webdriver.chrome.service import Service
 
 #####################################DATA_CLEANING############################################
 
-df = pd.read_csv(r"C:\Users\HP\Downloads\Opportunities (2).csv")
+df = pd.read_csv(r"Opportunities (2).csv")
 df[' "Solution"'] = df[' "Solution"'].str.replace("Services::::", "")
 df[' "Partenaire"'] = df[' "Partenaire"'].str.replace("Vendors::::", "")
 df[' "Assigned To"'] = df[' "Assigned To"'].str.replace("@ineos.ma", "")
@@ -335,7 +335,3 @@ st.bar_chart(t1, x='Rappel du partenaire technologique', y='Amount')
 st.bar_chart(t2, x='Solution', y='Amount')
 st.bar_chart(t3, x='Assigned To', y='Amount')
 
-
-if __name__ == '__main__':
-    sys.argv = ["streamlit", "run", "Python_streamlit.py"]
-    sys.exit(stcli.main())
