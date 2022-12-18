@@ -32,7 +32,7 @@ import time
 import glob
 import os
 
-
+st.subheader("INEOS Dashbord")
 
 #####################################DATA_CLEANING############################################
 
@@ -49,6 +49,7 @@ df[' "Last Modified By"'] = df[' "Last Modified By"'].str.replace(".", " ")
 
 
 st.set_page_config(page_title="Sales Dashboard", page_icon=":bar_chart:", layout="wide")
+st.title("Extraite de la CRM")
 st.dataframe(df)
 
 ################################ADD_FILTERS######################################
@@ -66,6 +67,7 @@ filter2_value = st.sidebar.text_input("Choisissez l'organisation :")
 filtered_df = df[(df[' "Assigned To"'] == filter1_value) & (df[' "Entité"'] == filter2_value)]
 
 # TOSHOW_DATA
+st.title("Tableau filtre")
 st.dataframe(filtered_df)
 
 st.sidebar.header("Filtrer en fonction de 'assigned to':")
@@ -76,6 +78,7 @@ filter3_value = st.sidebar.text_input("Entrer le nom de la personne :")
 filtered_df2 = df[(df[' "Assigned To"'] == filter3_value)]
 
 # TOSHOW_DATA
+st.title("Tableau filtre")
 st.dataframe(filtered_df2)
 
 # Calculate the sum of the column
@@ -134,6 +137,7 @@ df2 = pd.DataFrame([['Qualification', 'Ineos', a1], ['Qualification', 'Cyberforc
                     ['Abandonnée', 'Cyberforce', a12]
                     ], columns=['Opportunities', 'Entité', 'Sales'])
 fig1 = px.bar(df2, x="Opportunities", y="Sales", color="Entité", barmode='group')
+st.title("Graphe Sales en fonction opportunite")
 st.plotly_chart(fig1)
 
 ###############graphe 2 :
@@ -310,6 +314,7 @@ df3 = pd.DataFrame(
      ], columns=['Sales Stage', 'Manager', 'Sales'])
 
 fig2 = px.bar(df3, x='Sales Stage', y="Sales", color='Manager', barmode='group')
+st.title("Graphe Sales et Sales Stage")
 st.plotly_chart(fig2)
 
 #############graphe 3 :
@@ -337,6 +342,7 @@ df4 = pd.DataFrame([['reda bakkali', v1], ['amine nemrouch', v2], ['mohamed ikni
                     ['hamida benlemlih', v5], ['yahya ajbali', v6],
                     ], columns=['Manager', 'Sales'])
 fig3 = px.bar(df4, x="Manager", y="Sales")
+st.title("Graphe Manager en fonction Sales")
 st.plotly_chart(fig3)
 
 ################graphe 4 :
@@ -401,6 +407,7 @@ df5 = pd.DataFrame(
      ['DELL EMC', w16]
      ], columns=['partenaire technologique', 'Sales'])
 fig4 = px.bar(df5, x="partenaire technologique", y="Sales")
+st.title("Graphe partenaire technologique en fonction Sales")
 st.plotly_chart(fig4)
 
 ############graphe 5 :
@@ -449,6 +456,7 @@ df6 = pd.DataFrame([['Cloud', s1], ['Postes de travail', s2], ['Réseau', s3], [
                     ['Audit et conseil', s9], ['SOC', s10], ['Maintenance', s11], ['DevOps', s12], ['NaN', s13]
                     ], columns=['Solution', 'Sales'])
 fig5 = px.bar(df6, x="Solution", y="Sales")
+st.title("Graphe Solution en fonction Sales")
 st.plotly_chart(fig5)
 
 
