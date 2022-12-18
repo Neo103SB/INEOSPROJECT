@@ -8,8 +8,30 @@ import streamlit as st
 import plotly.figure_factory as ff
 
 from streamlit.web import cli as stcli
-
+import plotly.express as px
 import sys
+import io
+import sys
+import time
+
+
+
+###########################################selenium################################################
+
+import selenium
+import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium import webdriver
+#browser = webdriver.Chrome(executable_path='../drivers/chromedriver.exe')
+#browser.get("https://tmp.ineos-crm.ma/")
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+
+
+#####################################DATA_CLEANING############################################
 
 df = pd.read_csv(r"Opportunities (2).csv")
 df[' "Solution"'] = df[' "Solution"'].str.replace("Services::::", "")
@@ -20,8 +42,52 @@ df[' "Campaign Source"'] = df[' "Campaign Source"'].str.replace("Campaigns::::",
 df[' "Last Modified By"'] = df[' "Last Modified By"'].str.replace("@ineos.ma", "")
 df[' "Last Modified By"'] = df[' "Last Modified By"'].str.replace(".", " ")
 
-### 1er graphe
 
+#########################################STREAMLIT_TEXT_HEADLINES###################################
+
+
+
+st.set_page_config(page_title="Sales Dashboard", page_icon=":bar_chart:", layout="wide")
+st.dataframe(df)
+
+################################ADD_FILTERS######################################
+
+# ---- SIDEBAR CREATION----
+# Create a sidebar with a dropdown menu
+
+#########Filtrer en fonction de assigned to & Entité
+
+st.sidebar.header("Filtrer en fonction de assigned to & Entité:")
+
+filter1_value = st.sidebar.text_input("Entrer le nom de la personne:")
+filter2_value = st.sidebar.text_input("Choisissez l'organisation :")
+
+
+filtered_df = df[(df[' "Assigned To"'] == filter1_value) & (df[' "Entité"'] == filter2_value)]
+
+#TOSHOW_DATA
+st.dataframe(filtered_df)
+
+st.sidebar.header("Filtrer en fonction de 'assigned to':")
+#
+
+filter3_value = st.sidebar.text_input("Entrer le nom de la personne :")
+# Filter the dataset based on the filter value and display the results
+filtered_df2 = df[(df[' "Assigned To"'] == filter3_value)]
+
+#TOSHOW_DATA
+st.dataframe(filtered_df2)
+
+# Calculate the sum of the column
+sum_value = df[' "Amount"'].sum()
+
+# Display the sum value
+st.write("Total Amount:", sum_value, format= 'plain')
+
+
+
+#############################################GRAPHES_CREATION#######################################
+######FIRST
 l1 = []
 for x in df['Rappel du partenaire technologique']:
     if x not in l1:
@@ -103,7 +169,7 @@ d = []
 for i in range(len(l1)):
     d.append([l1[i], l2[i]])
 
-###2e graphe:
+###SECOND:
 
 m1=[]
 for x in df[' "Solution"']:
@@ -170,7 +236,7 @@ for i in range(len(m1)):
 st.header("BI APP TEST")
 st.write("VERSION BETA DE L'APP")
 
-##Graphe 3##
+######THIRD
 
 b1=[]
 for x in df[' "Assigned To"']:
@@ -209,8 +275,57 @@ c=[]
 for i in range(len(b1)):
   c.append([b1[i],b2[i]])
 
+######FOURTH:
 
-##1##
+Subject = ['Qualification', 'Closed Won', 'Nouveau', 'Closed Lost', 'Proposition', 'Abandonnée']
+a1=0
+a2=0
+a3=0
+a4=0
+a5=0
+a6=0
+a7=0
+a8=0
+a9=0
+a10=0
+a11=0
+a12=0
+for i in range(len(df[' "Entité"'])):
+  if df[' "Entité"'][i] == 'Ineos' and df[' "Sales Stage"'][i] == 'Qualification':
+    a1 = a1 + df[' "Amount"'][i]
+  if df[' "Entité"'][i] == 'Cyberforce' and df[' "Sales Stage"'][i] == 'Qualification':
+    a2 = a2 + df[' "Amount"'][i]
+  if df[' "Entité"'][i] == 'Ineos' and df[' "Sales Stage"'][i] == 'Closed Won':
+    a3 = a3 + df[' "Amount"'][i]
+  if df[' "Entité"'][i] == 'Cyberforce' and df[' "Sales Stage"'][i] == 'Closed Won':
+    a4 = a4 + df[' "Amount"'][i]
+  if df[' "Entité"'][i] == 'Ineos' and df[' "Sales Stage"'][i] == 'Nouveau':
+    a5 = a5 + df[' "Amount"'][i]
+  if df[' "Entité"'][i] == 'Cyberforce' and df[' "Sales Stage"'][i] == 'Nouveau':
+    a6 = a6 + df[' "Amount"'][i]
+  if df[' "Entité"'][i] == 'Ineos' and df[' "Sales Stage"'][i] == 'Closed Lost':
+    a7 = a7 + df[' "Amount"'][i]
+  if df[' "Entité"'][i] == 'Cyberforce' and df[' "Sales Stage"'][i] == 'Closed Lost':
+    a8 = a8 + df[' "Amount"'][i]
+  if df[' "Entité"'][i] == 'Ineos' and df[' "Sales Stage"'][i] == 'Proposition':
+    a9 = a9 + df[' "Amount"'][i]
+  if df[' "Entité"'][i] == 'Cyberforce' and df[' "Sales Stage"'][i] == 'Proposition':
+    a10 = a10 + df[' "Amount"'][i]
+  if df[' "Entité"'][i] == 'Ineos' and df[' "Sales Stage"'][i] == 'Abandonnée':
+    a11 = a11 + df[' "Amount"'][i]
+  if df[' "Entité"'][i] == 'Cyberforce' and df[' "Sales Stage"'][i] == 'Abandonnée':
+    a12 = a12 + df[' "Amount"'][i]
+
+# Create the pandas DataFrame
+df = pd.DataFrame([['Qualification', 'Ineos',a1],['Qualification', 'Cyberforce',a2],['Closed Won', 'Ineos',a3],['Closed Won', 'Cyberforce',a4],
+                   ['Nouveau', 'Ineos',a5],['Nouveau', 'Cyberforce',a6],['Closed Lost', 'Ineos',a7],['Closed Lost', 'Cyberforce',a8],
+                   ['Proposition', 'Ineos',a9],['Proposition', 'Cyberforce',a10],['Abandonnée', 'Ineos',a11],['Abandonnée', 'Cyberforce',a12]
+                   ], columns = ['Opportunities', 'Entité','Sales'])
+fig = px.bar(df, x="Opportunities", y="Sales", color="Entité",barmode='group')
+fig.show()
+
+
+####################################GRAPHES_PLOTTING############################
 
 t1 = pd.DataFrame(d, columns=['Rappel du partenaire technologique', 'Amount'])
 t2=pd.DataFrame(z,columns=['Solution','Amount'])
@@ -219,6 +334,5 @@ t3=pd.DataFrame(c,columns=['Assigned To','Amount'])
 st.bar_chart(t1, x='Rappel du partenaire technologique', y='Amount')
 st.bar_chart(t2, x='Solution', y='Amount')
 st.bar_chart(t3, x='Assigned To', y='Amount')
-
 
 
