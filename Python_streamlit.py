@@ -48,7 +48,7 @@ df[' "Last Modified By"'] = df[' "Last Modified By"'].str.replace(".", " ")
 #########################################STREAMLIT_TEXT_HEADLINES###################################
 
 
-st.set_page_config(page_title="Sales Dashboard", page_icon=":bar_chart:", layout="wide")
+
 st.title("Extraite de la CRM")
 st.dataframe(df)
 
