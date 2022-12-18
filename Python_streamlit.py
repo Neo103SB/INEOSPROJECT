@@ -32,64 +32,11 @@ import time
 import glob
 import os
 
-browser = webdriver.Chrome(executable_path='chromedriver/chromedriver.exe')
-browser.get("https://tmp.ineos-crm.ma/")
-file = open(r"config.txt")
-line = file.readlines()
-username = line[0]
-password = line[1]
 
-elementID = browser.find_element(By.ID, 'username')
-elementID.send_keys(username)
-elementID = browser.find_element(By.ID, 'password')
-elementID.send_keys(password)
-elementID.submit()
-
-# Set the path where you want to save the file
-browser.get('https://tmp.ineos-crm.ma/index.php?module=Potentials&view=List&app=SALES')
-browser.find_element(by=By.CLASS_NAME, value='caret').click()
-time.sleep(5)
-browser.find_element(by=By.ID, value='Potentials_listView_advancedAction_LBL_EXPORT').click()
-time.sleep(5)
-browser.find_element(by=By.XPATH, value='//*[@id="exportForm"]/div[3]/div/div/div/button').click()
-time.sleep(5)
-browser.close()
-######
-# Get a list of all files matching the pattern
-csv_files = glob.glob(r"C:\Users\HP\Downloads\Opportunities*.csv")
-
-# Sort the list by modification time
-csv_files.sort(key=os.path.getmtime)
-
-# Process the last file in the sorted list
-latest_file = csv_files[-1]
-# Set the file path and name
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-
-driver = webdriver.Chrome()
-driver.get("https://github.com/login")
-username_field = driver.find_element(By.ID, "login_field")
-password_field = driver.find_element(By.ID, "password")
-
-username_field.send_keys("hamza.sbiti@centrale-casablanca.ma")
-password_field.send_keys("Hamza2002Hamza_")
-login_button = driver.find_element(By.NAME, "commit")
-login_button.click()
-driver.get("https://github.com/Neo103SB/INEOSPROJECT/upload/master")
-file_input = driver.find_element(By.XPATH, value='//*[@id="upload-manifest-files-input"]')
-time.sleep(3)
-file_input.send_keys(str(latest_file))
-time.sleep(3)
-upload_button = driver.find_element(By.XPATH, '//*[@id="repo-content-pjax-container"]/div/form/button')
-time.sleep(3)
-upload_button.click()
-time.sleep(3)
-driver.close()
 
 #####################################DATA_CLEANING############################################
 
-df = pd.read_csv(str(latest_file))
+df = pd.read_csv(r"Opportunities (2).csv")
 df[' "Solution"'] = df[' "Solution"'].str.replace("Services::::", "")
 df[' "Partenaire"'] = df[' "Partenaire"'].str.replace("Vendors::::", "")
 df[' "Assigned To"'] = df[' "Assigned To"'].str.replace("@ineos.ma", "")
