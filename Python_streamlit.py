@@ -18,17 +18,7 @@ import time
 
 ###########################################selenium################################################
 
-import selenium
-import time
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
-#browser = webdriver.Chrome(executable_path='../drivers/chromedriver.exe')
-#browser.get("https://tmp.ineos-crm.ma/")
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
+
 
 
 #####################################DATA_CLEANING############################################
