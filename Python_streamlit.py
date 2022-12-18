@@ -312,7 +312,7 @@ df = pd.DataFrame([['Qualification', 'Ineos',a1],['Qualification', 'Cyberforce',
                    ['Proposition', 'Ineos',a9],['Proposition', 'Cyberforce',a10],['Abandonnée', 'Ineos',a11],['Abandonnée', 'Cyberforce',a12]
                    ], columns = ['Opportunities', 'Entité','Sales'])
 fig = px.bar(df, x="Opportunities", y="Sales", color="Entité",barmode='group')
-fig.show()
+st.plotly_chart(fig)
 
 
 ####################################GRAPHES_PLOTTING############################
@@ -324,5 +324,6 @@ t3=pd.DataFrame(c,columns=['Assigned To','Amount'])
 st.bar_chart(t1, x='Rappel du partenaire technologique', y='Amount')
 st.bar_chart(t2, x='Solution', y='Amount')
 st.bar_chart(t3, x='Assigned To', y='Amount')
+
 
 
