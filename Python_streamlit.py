@@ -34,7 +34,7 @@ import os
 
 browser = webdriver.Chrome(executable_path='../drivers/chromedriver.exe')
 browser.get("https://tmp.ineos-crm.ma/")
-file = open(r"C:\Users\HP\Downloads\config.txt")
+file = open(r"config.txt")
 line = file.readlines()
 username = line[0]
 password = line[1]
